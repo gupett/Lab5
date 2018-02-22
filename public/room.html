@@ -1,0 +1,29 @@
+<div class="container">
+
+  <section class="col-md-10 col-md-offset-1">
+    <div class="row" style="text-align: center;">
+      <h1>{{room}}</h1>
+    </div>
+    <div style="border: 2px solid black">
+      <div ng-repeat="entry in entries track by $index">
+          {{entry}} <br>
+      </div>
+    </div>
+
+  	<form class=".form-inline" ng-submit="done()">
+      <div class="form-group">
+        <label for="company">Company</label>
+        <input class="form-control" type="text" ng-model="mess" id="loginInputField" required autofocus>
+      </div>
+      <div class="form-group">
+        <label for="amount">Amount</label>
+        <input class="form-control" type="number" ng-model="amount" id="loginInputField" required autofocus>
+      </div>
+      <div class="form-group">
+        <label for="price">Price</label>
+          <input class="form-control" type="number" ng-model="price" id="loginInputField" required autofocus>
+      </div>
+      <button type="submit" class="btn btn-default">Submit</button>
+  	</form>
+  </section>
+</div>
