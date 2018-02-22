@@ -5,6 +5,7 @@ var model = require('./model.js');
 
 module.exports = function (socket, io) {
 
+
   // user joins room
   socket.on('join', function (req) {
     console.log(req);
@@ -15,7 +16,7 @@ module.exports = function (socket, io) {
     socket.join(name);
     console.log('A user joined ' + name);
     io.to(name).emit('join', req);
-    room.addMessage(req.username + " joined the channel");
+    //room.addMessage(req.username + " joined the channel");
   });
 
   // user gets updated
@@ -26,10 +27,10 @@ module.exports = function (socket, io) {
     var room = model.findRoom(roomName);
     console.log("update from socket" + req.update);
     //TODO: added message structure
-    var message = {'company': req.company, 'amount': req.amount, 'price': req.price};
+    var message = {'user': req.username, 'company': req.company, 'amount': req.amount, 'type': req.type};
     console.log("message from socket controller");
     console.log(message);
-    room.addMessage(req.username + ": " + message);
+    room.addMessage(message);
   });
 
   // user leaves room

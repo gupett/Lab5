@@ -22,9 +22,11 @@ chattControllers.controller('roomController', ['$scope', 'HttpService', '$routeP
     //TODO: added new input parameters
     $scope.mess = "";
     $scope.amount = "";
-    $scope.price = "";
+    $scope.type = "";
 
     $scope.entries = [];
+    $scope.trades = [];
+
     // $scope.entries = ["always", "leaving", "from", "recieve", "me", "down"];
     http.get("/room/"+$scope.room, function(data) {
 
@@ -32,6 +34,8 @@ chattControllers.controller('roomController', ['$scope', 'HttpService', '$routeP
       console.log("message from get /room");
       console.log(data);
       $scope.entries = data.list;
+      $scope.trades = data.list;
+      console.log($scope.entries);
       socket.emit("join", {name:$scope.room, username: user.getName()});
     });
     var socket = io().connect();
@@ -41,7 +45,7 @@ chattControllers.controller('roomController', ['$scope', 'HttpService', '$routeP
         console.log("update");
         console.log("Controller update")
         console.log(data);
-        $scope.entries.push(data.username + ": " + data.company + ": " + data.amount + ": " + data.price);
+        $scope.entries.push(data);
       });
     });
 
@@ -49,7 +53,7 @@ chattControllers.controller('roomController', ['$scope', 'HttpService', '$routeP
       $scope.$apply(function(){
         console.log("join");
         console.log(data);
-        $scope.entries.push(data.username + " joined the channel");
+        //$scope.entries.push(data.username + " joined the channel");
       });
     });
 
@@ -61,10 +65,10 @@ chattControllers.controller('roomController', ['$scope', 'HttpService', '$routeP
 
     $scope.done = function() {
       console.log("Reached done()");
-      socket.emit("update", {room: $scope.room, company: $scope.mess, amount:$scope.amount, price: $scope.price, username:user.getName()});
+      socket.emit("update", {room: $scope.room, company: $scope.mess, amount:$scope.amount, type: $scope.type, username:user.getName()});
       $scope.mess = "";
       $scope.amount = "";
-      $scope.price = "";
+      $scope.type = "";
     };
 
   }

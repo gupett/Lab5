@@ -32,9 +32,7 @@ io.on('connection', function (socket) {
 });
 
 var model = require('./model.js');
-model.addRoom("Köp");
-model.addRoom("Sälj");
-
+model.addRoom("Buy and Sell");
 
 httpServer.listen(port, function () {
   console.log("server listening on port", port);
