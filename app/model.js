@@ -28,63 +28,65 @@ function Room(name) {
     };
 
     this.addOrder = function(newOrder){
-      // Check if the order can go through and remove the orders which will hapened
-      this.orders.forEach(function(order) {
+    // Check if the order can go through and remove the orders which will hapened
 
-        if (order.company == newOrder.company && order.type != newOrder.type){ // It is a match
+      for (var i = 0; i < this.orders.length; i++) {
+      
+        if (this.orders[i].company == newOrder.company && this.orders[i].type != newOrder.type){ // It is a match
 
-          if(order.amount < newOrder.amount){
-            newOrder.amount = newOrder.amount - order.amount;
+          if(this.orders[i].amount < newOrder.amount){
+            newOrder.amount = newOrder.amount - this.orders[i].amount;
             // Add the trade to the trade list
-            this.addTrade(order, newOrder.user);
+            this.trades = addTrade(this.orders[i], newOrder.user, this.trades);
 
             // Remove order from orders list
-            this.removeOrder(order);
+            this.orders = removeOrder(this.orders, this.orders[i]);
 
-          }else if(order.amount > newOrder.amount){
-            order.amount = order.amount - newOrder.amount;
+          }else if(this.orders[i].amount > newOrder.amount){
+            this.orders[i].amount = this.orders[i].amount - newOrder.amount;
             // Add the tarde to the trade list
-            this.addTrade(newOrder, order.user);
+            this.trades = addTrade(newOrder, this.orders[i].user, this.trades);
 
             // Stop loopint over the array and do not add the new order to the order list
             return;
           }else{
             // Add the trade to the trade list
-            this.addTrade(order, newOrder.user);
+            this.trades = addTrade(this.orders[i], newOrder.user, this.trades);
             // Remove order from the orders list and add the order to the trades list
-            this.removeOrder(order);
+            this.orders = removeOrder(this.orders, this.orders[i]);
             return;
           }
 
         }
 
-
-      });
-
-      // For every order which happeneds add the trade to the trade list
-      this.orders.push(newOrder)
-    }
-
-    this.removeOrder = function remove(element) {
-      const index = array.indexOf(element);
-      this.orders.splice(index, 1);
-    }
-
-    this.addTrade = function(order, user){
-      if (order.type == 'buy'){
-         var newTrade = new Trade(order.user, user, order.type, order.company, order.amount);
-      }else{
-         var newTrade = new Trade(user, order.user, order.type, order.company, order.amount);
       }
-      this.trades.push(newTrade);
-    }
+
+    // For every order which happeneds add the trade to the trade list
+    this.orders.push(newOrder);
+  };
+}
+
+
+function removeOrder(orders, element) {
+  const index = orders.indexOf(element);
+  orders.splice(index, 1);
+  return orders;
+}
+
+function addTrade(order, user, trades){
+  if (order.type == 'buy'){
+     var newTrade = new Trade(order.user, user, order.company, order.amount);
+  }else{
+     var newTrade = new Trade(user, order.user, order.company, order.amount);
+  }
+  trades.push(newTrade);
+  return trades;
 }
 
 // Trade
-function Trade(buyer, seller, type, company, amount){
+function Trade(buyer, seller, company, amount){
   this.buyer = buyer;
   this.seller = seller;
-  this.type = type;
   this.company = company;
   this.amount = amount;
 }
