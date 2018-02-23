@@ -44,7 +44,6 @@
                 <thead>
                   <tr>
                     <th>Company</th>
-                    <th>Type</th>
                     <th>Amount</th>
                     <th>Buyer</th>
                     <th>Seller</th>
@@ -53,16 +52,14 @@
                 <tbody>
                   <tr ng-repeat="entry in trades track by $index">
                     <td>{{entry.company}}</td>
-                    <td>{{entry.type}}</td>
                     <td>{{entry.amount}}</td>
-                    <td>{{entry.user}}</td>
-                    <td>{{entry.user}}</td>
+                    <td>{{entry.buyer}}</td>
+                    <td>{{entry.seller}}</td>
                   </tr>
                 </tbody>
                 <tfoot>
                   <tr>
                     <th>Company</th>
-                    <th>Type</th>
                     <th>Amount</th>
                     <th>Buyer</th>
                     <th>Seller</th>
