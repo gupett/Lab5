@@ -23,14 +23,23 @@ module.exports = function (socket, io) {
   socket.on('update', function (req) {
     console.log(req);
     var roomName = req.room;
-    io.to(roomName).emit('update', req);
+    
     var room = model.findRoom(roomName);
     console.log("update from socket" + req.update);
     //TODO: added message structure
-    var message = {'user': req.username, 'company': req.company, 'amount': req.amount, 'type': req.type};
+    var newOrder = {'user': req.user,'type': req.type,'company': req.company,'amount': req.amount};
+    room.addOrder(newOrder);
+    // Send back the uppdated order list and trades
+    var message = {'company': req.company, 'amount': req.amount, 'price': req.price};
+    io.to(roomName).emit('update', {orders: room.orders, trades: room.trades});
+
     console.log("message from socket controller");
     console.log(message);
-    room.addMessage(message);
+    room.addMessage(req.username + ": " + message);
+
+    // Add the order to the order list of the room
+
+
   });
 
   // user leaves room
