@@ -47,11 +47,9 @@ chattControllers.controller('roomController', ['$scope', 'HttpService', '$routeP
         console.log(data);
 
         //TODO test for new trades data
-        /*
-        var message = {'user': 'Kalle', 'company': 'Ankeborg AB', 'amount': '100000', 'type': 'Köp'};
-        $scope.entries.push(data);
-        $scope.trades.push(message);
-        */
+       //var message = {'user': 'Kalle', 'company': 'Ankeborg AB', 'amount': '100000', 'type': 'Köp'};
+       $scope.entries = data.orders;
+       //$scope.trades = data.trades;
       });
     });
 
@@ -93,9 +91,9 @@ chattControllers.controller('loginController', ['$scope', 'HttpService', '$locat
     $scope.done = function() {
       console.log("Reached done()");
       http.post('setUser', {realname: $scope.name}, function(response) {
-        console.log(response);
         user.setName($scope.name);
         $location.path('list');
+
       });
     };
 
