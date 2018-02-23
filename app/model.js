@@ -30,7 +30,7 @@ function Room(name) {
     this.addOrder = function(newOrder){
       // Check if the order can go through and remove the orders which will hapened
       this.orders.forEach(function(order) {
-        
+
         if (order.company == newOrder.company && order.type != newOrder.type){ // It is a match
 
           if(order.amount < newOrder.amount){
