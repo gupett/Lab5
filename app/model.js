@@ -30,10 +30,10 @@ function Room(name) {
     this.addOrder = function(newOrder){
       // Check if the order can go through and remove the orders which will hapened
       this.orders.forEach(function(order) {
+        
+        if (order.company == newOrder.company && order.type != newOrder.type){ // It is a match
 
-        if (order.company == newOrder && order.type != newOrder.type){ // It is a match
-
-          if(order.amount < newOrder){
+          if(order.amount < newOrder.amount){
             newOrder.amount = newOrder.amount - order.amount;
             // Add the trade to the trade list
             this.addTrade(order, newOrder.user);
@@ -41,7 +41,7 @@ function Room(name) {
             // Remove order from orders list
             this.removeOrder(order);
 
-          }else if(order.amount > newOrder){
+          }else if(order.amount > newOrder.amount){
             order.amount = order.amount - newOrder.amount;
             // Add the tarde to the trade list
             this.addTrade(newOrder, order.user);
