@@ -15,12 +15,11 @@ router.get('/roomlist', function (req, res) {
 });
 
 router.get('/room/:room', function (req, res) {
-  var messages = model.findRoom(req.params.room).messages;
   // Lists which should be returned ont the get request
   var trades = model.findRoom(req.params.room).trades;
   var orders = model.findRoom(req.params.room).orders;
 
-  res.json({list: messages});
+  res.json({orders: orders, trades: trades});
 });
 
 router.post('/setUser', function (req, res) {

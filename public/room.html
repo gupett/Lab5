@@ -19,10 +19,10 @@
                   </tr>
                 </thead>
                 <tbody>
-                  <tr ng-repeat="entry in entries track by $index">
-                    <td>{{entry.company}}</td>
-                    <td>{{entry.type}}</td>
-                    <td>{{entry.amount}}</td>
+                  <tr ng-repeat="order in orders track by $index">
+                    <td>{{order.company}}</td>
+                    <td>{{order.type}}</td>
+                    <td>{{order.amount}}</td>
                   </tr>
                 </tbody>
                 <tfoot>
@@ -47,14 +47,16 @@
                     <th>Amount</th>
                     <th>Buyer</th>
                     <th>Seller</th>
+                    <th>Time</th>
                   </tr>
                 </thead>
                 <tbody>
-                  <tr ng-repeat="entry in trades track by $index">
-                    <td>{{entry.company}}</td>
-                    <td>{{entry.amount}}</td>
-                    <td>{{entry.buyer}}</td>
-                    <td>{{entry.seller}}</td>
+                  <tr ng-repeat="trade in trades track by $index">
+                    <td>{{trade.company}}</td>
+                    <td>{{trade.amount}}</td>
+                    <td>{{trade.buyer}}</td>
+                    <td>{{trade.seller}}</td>
+                    <td>{{trade.time}}</td>
                   </tr>
                 </tbody>
                 <tfoot>
@@ -63,6 +65,7 @@
                     <th>Amount</th>
                     <th>Buyer</th>
                     <th>Seller</th>
+                    <th>Time</th>
                   </tr>
                 </tfoot>
               </table>

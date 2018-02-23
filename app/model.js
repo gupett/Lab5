@@ -31,7 +31,7 @@ function Room(name) {
     // Check if the order can go through and remove the orders which will hapened
 
       for (var i = 0; i < this.orders.length; i++) {
-      
+
         if (this.orders[i].company == newOrder.company && this.orders[i].type != newOrder.type){ // It is a match
 
           if(this.orders[i].amount < newOrder.amount){
@@ -41,6 +41,7 @@ function Room(name) {
 
             // Remove order from orders list
             this.orders = removeOrder(this.orders, this.orders[i]);
+            i--;
 
           }else if(this.orders[i].amount > newOrder.amount){
             this.orders[i].amount = this.orders[i].amount - newOrder.amount;
@@ -54,6 +55,7 @@ function Room(name) {
             this.trades = addTrade(this.orders[i], newOrder.user, this.trades);
             // Remove order from the orders list and add the order to the trades list
             this.orders = removeOrder(this.orders, this.orders[i]);
+            i--;
             return;
           }
 
@@ -74,7 +76,7 @@ function removeOrder(orders, element) {
 }
 
 function addTrade(order, user, trades){
-  if (order.type == 'buy'){
+  if (order.type == 'Buy'){
      var newTrade = new Trade(order.user, user, order.company, order.amount);
   }else{
      var newTrade = new Trade(user, order.user, order.company, order.amount);
@@ -89,6 +91,8 @@ function Trade(buyer, seller, company, amount){
   this.seller = seller;
   this.company = company;
   this.amount = amount;
+  var date = new Date();
+  this.time = date.getHours().toString() + ":" + date.getMinutes().toString() + ":" + date.getSeconds().toString();
 }
 
 // Order
@@ -128,14 +132,6 @@ exports.removeRoom = function(name){
       break;
     }
   }
-};
-
-/**
- * Return random numbers
- * @type {[type]}
- */
-exports.getRandom = function () {
-  console.log("RANDOM");
 };
 
 /**
