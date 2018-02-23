@@ -29,7 +29,6 @@ function Room(name) {
 
     this.addOrder = function(newOrder){
     // Check if the order can go through and remove the orders which will hapened
-    // Comment
 
       for (var i = 0; i < this.orders.length; i++) {
       
