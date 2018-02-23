@@ -24,7 +24,8 @@ router.get('/room/:room', function (req, res) {
 });
 
 router.post('/setUser', function (req, res) {
-  res.json({name:"Anon"});
+  console.log("Set user in controller");
+  res.json({name: "anon"});
 });
 
 module.exports = router;
