@@ -45,7 +45,11 @@ chattControllers.controller('roomController', ['$scope', 'HttpService', '$routeP
         console.log("update");
         console.log("Controller update")
         console.log(data);
+
+        //TODO test for new trades data
+        var message = {'user': 'Kalle', 'company': 'Ankeborg AB', 'amount': '100000', 'type': 'Köp'};
         $scope.entries.push(data);
+        $scope.trades.push(message);
       });
     });
 

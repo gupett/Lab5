@@ -4,67 +4,90 @@
     <div class="row" style="text-align: center;">
       <h1>{{room}}</h1>
     </div>
-    <div>
-      <div class="panel panel-success">
-        <div class="panel-heading">Orders</div>
-        <div class="panel-body">
-          <table class="table table-striped">
-            <thead>
-              <tr>
-                <th>Company</th>
-                <th>Type</th>
-                <th>Amount</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr ng-repeat="entry in entries track by $index">
-                <td>{{entry.company}}</td>
-                <td>{{entry.type}}</td>
-                <td>{{entry.amount}}</td>
-              </tr>
-            </tbody>
-          </table>
+    <div class="container">
+      <div class="row">
+        <div class="col-md-5">
+          <div class="panel panel-success">
+            <div class="panel-heading">Orders</div>
+            <div class="panel-body" style="overflow: scroll; max-height:250px;">
+              <table class="table table-striped">
+                <thead>
+                  <tr>
+                    <th>Company</th>
+                    <th>Type</th>
+                    <th>Amount</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr ng-repeat="entry in entries track by $index">
+                    <td>{{entry.company}}</td>
+                    <td>{{entry.type}}</td>
+                    <td>{{entry.amount}}</td>
+                  </tr>
+                </tbody>
+                <tfoot>
+                  <tr>
+                    <th>Company</th>
+                    <th>Type</th>
+                    <th>Amount</th>
+                  </tr>
+                </tfoot>
+              </table>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-5">
+          <div class="panel panel-info">
+            <div class="panel-heading">Recent Trades</div>
+            <div class="panel-body" style="overflow: scroll; max-height:250px;">
+              <table class="table table-striped">
+                <thead>
+                  <tr>
+                    <th>Company</th>
+                    <th>Type</th>
+                    <th>Amount</th>
+                    <th>Buyer</th>
+                    <th>Seller</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr ng-repeat="entry in trades track by $index">
+                    <td>{{entry.company}}</td>
+                    <td>{{entry.type}}</td>
+                    <td>{{entry.amount}}</td>
+                    <td>{{entry.user}}</td>
+                    <td>{{entry.user}}</td>
+                  </tr>
+                </tbody>
+                <tfoot>
+                  <tr>
+                    <th>Company</th>
+                    <th>Type</th>
+                    <th>Amount</th>
+                    <th>Buyer</th>
+                    <th>Seller</th>
+                  </tr>
+                </tfoot>
+              </table>
+            </div>
+          </div>
         </div>
       </div>
-      <div class="panel panel-info">
-        <div class="panel-heading">Recent Trades</div>
-        <div class="panel-body">
-          <table class="table table-striped">
-            <thead>
-              <tr>
-                <th>Company</th>
-                <th>Type</th>
-                <th>Amount</th>
-                <th>Buyer</th>
-                <th>Seller</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr ng-repeat="entry in trades track by $index">
-                <td>{{entry.company}}</td>
-                <td>{{entry.type}}</td>
-                <td>{{entry.amount}}</td>
-                <td>{{entry.user}}</td>
-                <td>{{entry.user}}</td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
-      </div>
-
     </div>
-
-    <form class=".form-inline" ng-submit="done()">
-      <div class="form-group">
-        <label for="type">Type</label>
-        <select class="form-control" type="select" ng-model="type" id="loginInputField" required autofocus>
+    <div class="container">
+      <div class="row">
+        <div class="col-md-10">
+          <form class="form" ng-submit="done()">
+            <div class="form-group">
+              <label for="type">Type</label>
+              <select class="form-control" type="select" ng-model="type" id="loginInputField" required autofocus>
             <option value="Buy" selected >Buy</option>
             <option value="Sell">Sell</option>
           </select>
-      </div>
-      <div class="form-group">
-        <label for="company">Company</label>
-        <select class="form-control" type="text" ng-model="mess" id="loginInputField" required autofocus>
+            </div>
+            <div class="form-group">
+              <label for="company">Company</label>
+              <select class="form-control" type="text" ng-model="mess" id="loginInputField" required autofocus>
           <option value="Ericsson" selected >Ericsson</option>
           <option value="Nokia">Nokia</option>
           <option value="Apple">Apple</option>
@@ -72,13 +95,15 @@
           <option value="Huawei">Huawei</option>
           <option value="Phillips">Phillips</option>
         </select>
+            </div>
+            <div class="form-group">
+              <label for="amount">Amount</label>
+              <input class="form-control" type="number" ng-model="amount" id="loginInputField" required autofocus>
+            </div>
+            <button type="submit" class="btn btn-default">Submit</button>
+          </form>
+        </div>
       </div>
-      <div class="form-group">
-        <label for="amount">Amount</label>
-        <input class="form-control" type="number" ng-model="amount" id="loginInputField" required autofocus>
-      </div>
-
-      <button type="submit" class="btn btn-default">Submit</button>
-    </form>
+    </div>
   </section>
 </div>
