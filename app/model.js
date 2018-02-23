@@ -30,7 +30,7 @@ function Room(name) {
     this.addOrder = function(newOrder){
       // Check if the order can go through and remove the orders which will hapened
       this.orders.forEach(function(order) {
-        
+
         if (order.company == newOrder && order.type != newOrder.type){ // It is a match
 
           if(order.amount < newOrder){
@@ -47,13 +47,13 @@ function Room(name) {
             this.addTrade(newOrder, order.user);
 
             // Stop loopint over the array and do not add the new order to the order list
-            return
+            return;
           }else{
             // Add the trade to the trade list
             this.addTrade(order, newOrder.user);
             // Remove order from the orders list and add the order to the trades list
             this.removeOrder(order);
-            return
+            return;
           }
 
         }
